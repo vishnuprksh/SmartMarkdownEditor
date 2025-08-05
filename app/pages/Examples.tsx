@@ -412,7 +412,7 @@ Summarize the report and emphasize the importance of acting on the recommendatio
     localStorage.setItem('markdown-documents', JSON.stringify(updatedDocs))
 
     // Navigate to editor with the new document
-    window.location.href = `/editor?doc=${newDoc.id}`
+    window.location.href = `/?doc=${newDoc.id}`
   }
 
   return (

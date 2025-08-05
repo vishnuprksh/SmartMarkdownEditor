@@ -13,23 +13,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <nav className="nav">
         <div className="container nav-content">
           <Link to="/" className="nav-brand">
-            📝 MarkdownPro
+            🧠 Smart Markdown Editor
           </Link>
           <ul className="nav-links">
             <li>
               <Link 
                 to="/" 
-                className={location.pathname === '/' ? 'active' : ''}
+                className={location.pathname === '/' || location.pathname === '/editor' ? 'active' : ''}
               >
-                Documents
+                Editor
               </Link>
             </li>
             <li>
               <Link 
-                to="/editor" 
-                className={location.pathname === '/editor' ? 'active' : ''}
+                to="/documents" 
+                className={location.pathname === '/documents' ? 'active' : ''}
               >
-                Editor
+                Documents
               </Link>
             </li>
             <li>

@@ -12,7 +12,7 @@
   ],
   "type": "module",
   "version": "0.0.0-development",
-  "description": "React component for rich text markdown editing",
+  "description": "Intelligent React component for rich text markdown editing with AI-powered features",
   "scripts": {
     "build": "vite build",
     "build:docs:api": "typedoc",

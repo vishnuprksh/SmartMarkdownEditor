@@ -34,6 +34,7 @@ const Editor: React.FC = () => {
   const [title, setTitle] = useState('')
   const [savedStatus, setSavedStatus] = useState<'saved' | 'saving' | 'unsaved'>('saved')
   const [wordCount, setWordCount] = useState(0)
+  const [hasBeenManuallySaved, setHasBeenManuallySaved] = useState(false)
 
   // Plugin configuration
   const plugins = [
@@ -60,12 +61,14 @@ const Editor: React.FC = () => {
         setMarkdown(doc.content)
         setTitle(doc.title)
         setWordCount(doc.wordCount)
+        setHasBeenManuallySaved(true) // Existing document has been saved before
       }
     } else {
       // New document
       const now = new Date()
       setTitle(`Untitled Document - ${now.toLocaleDateString()}`)
-      setMarkdown('# Welcome to MarkdownPro\n\nStart writing your document here. This editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks\n- Tables\n- And much more!\n\n## Getting Started\n\nJust start typing to begin your document. Your work is automatically saved as you type.')
+      setMarkdown('# Welcome to Smart Markdown Editor\n\nStart writing your document here. This intelligent editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks\n- Tables\n- And much more!\n\n## Getting Started\n\nJust start typing to begin your document. Press **Ctrl+S** or click the **Save** button to save your document and enable auto-save for future changes.')
+      setHasBeenManuallySaved(false) // New document hasn't been saved yet
     }
   }, [docId])
 
@@ -97,34 +100,44 @@ const Editor: React.FC = () => {
 
     // Update URL if this is a new document
     if (!docId) {
-      navigate(`/editor?doc=${docData.id}`, { replace: true })
+      navigate(`/?doc=${docData.id}`, { replace: true })
     }
   }, [markdown, title, docId, navigate])
 
-  // Save on content change (debounced)
+  // Manual save function
+  const manualSave = useCallback(() => {
+    setSavedStatus('saving')
+    saveDocument()
+    setHasBeenManuallySaved(true) // Enable auto-save after first manual save
+  }, [saveDocument])
+
+  // Auto-save on content change (only after first manual save)
   useEffect(() => {
     setSavedStatus('unsaved')
-    const timer = setTimeout(() => {
-      setSavedStatus('saving')
-      saveDocument()
-    }, 2000) // Auto-save after 2 seconds of inactivity
+    
+    // Only auto-save if the document has been manually saved at least once
+    if (hasBeenManuallySaved) {
+      const timer = setTimeout(() => {
+        setSavedStatus('saving')
+        saveDocument()
+      }, 2000) // Auto-save after 2 seconds of inactivity
 
-    return () => clearTimeout(timer)
-  }, [markdown, title, saveDocument])
+      return () => clearTimeout(timer)
+    }
+  }, [markdown, title, saveDocument, hasBeenManuallySaved])
 
   // Manual save with Ctrl+S
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === 's') {
         e.preventDefault()
-        setSavedStatus('saving')
-        saveDocument()
+        manualSave()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [saveDocument])
+  }, [manualSave])
 
   const exportMarkdown = () => {
     const blob = new Blob([markdown], { type: 'text/markdown' })
@@ -184,6 +197,11 @@ const Editor: React.FC = () => {
                 }}>
                   {savedStatus === 'saved' ? '✅ Saved' : savedStatus === 'saving' ? '⏳ Saving...' : '⚠️ Unsaved changes'}
                 </span>
+                {!hasBeenManuallySaved && (
+                  <span style={{ fontSize: '0.875rem', color: '#f59e0b' }}>
+                    📝 Press Ctrl+S or Save to enable auto-save
+                  </span>
+                )}
                 <span style={{ fontSize: '0.875rem', color: '#718096' }}>
                   {wordCount} words
                 </span>
@@ -206,7 +224,7 @@ const Editor: React.FC = () => {
                 📄 New
               </button>
               <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/documents')}
                 style={{
                   padding: '0.5rem 1rem',
                   backgroundColor: '#f7fafc',
@@ -218,6 +236,21 @@ const Editor: React.FC = () => {
                 }}
               >
                 📁 Documents
+              </button>
+              <button
+                onClick={manualSave}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: hasBeenManuallySaved ? '#f7fafc' : '#667eea',
+                  color: hasBeenManuallySaved ? '#4a5568' : 'white',
+                  border: hasBeenManuallySaved ? '1px solid #e2e8f0' : 'none',
+                  borderRadius: '0.375rem',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                  fontWeight: hasBeenManuallySaved ? 'normal' : '500'
+                }}
+              >
+                💾 Save {!hasBeenManuallySaved && '(Ctrl+S)'}
               </button>
               <button
                 onClick={copyToClipboard}

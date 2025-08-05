@@ -1,6 +1,6 @@
 # Smart Markdown Editor Web App
 
-This is a showcase web application for the Smart Markdown Editor React component library. The app demonstrates the full capabilities of the editor with multiple examples and live demos.
+This is a showcase web application for the Smart Markdown Editor React component library. The app demonstrates the full capabilities of the intelligent editor with multiple examples and live demos.
 
 ## 🚀 Quick Start
 

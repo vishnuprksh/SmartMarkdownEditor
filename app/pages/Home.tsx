@@ -70,7 +70,7 @@ const Home: React.FC = () => {
             </p>
           </div>
           <Link 
-            to="/editor" 
+            to="/" 
             className="cta-button"
             style={{ textDecoration: 'none' }}
           >
@@ -163,7 +163,7 @@ const Home: React.FC = () => {
                 </div>
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <Link
-                    to={`/editor?doc=${doc.id}`}
+                    to={`/?doc=${doc.id}`}
                     style={{
                       flex: 1,
                       padding: '0.5rem 1rem',
@@ -221,7 +221,7 @@ const Home: React.FC = () => {
               }
             </p>
             <Link 
-              to="/editor" 
+              to="/" 
               className="cta-button"
               style={{ textDecoration: 'none' }}
             >

@@ -9,8 +9,8 @@ const Help: React.FC = () => {
       icon: '🚀',
       content: (
         <div>
-          <h3>Welcome to MarkdownPro!</h3>
-          <p>MarkdownPro is a powerful markdown editor that makes writing and formatting documents easy and intuitive.</p>
+          <h3>Welcome to Smart Markdown Editor!</h3>
+          <p>Smart Markdown Editor is a powerful markdown editor that makes writing and formatting documents easy and intuitive.</p>
           
           <h4>Creating Your First Document</h4>
           <ol>
@@ -145,7 +145,7 @@ const Help: React.FC = () => {
       content: (
         <div>
           <h3>Creating Tables</h3>
-          <p>Tables are easy to create and edit in MarkdownPro. You can use the toolbar button or type the markdown syntax:</p>
+          <p>Tables are easy to create and edit in Smart Markdown Editor. You can use the toolbar button or type the markdown syntax:</p>
           
           <div style={{ backgroundColor: '#f8fafc', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem' }}>
             <pre style={{ margin: 0, fontSize: '0.875rem' }}>
@@ -166,7 +166,7 @@ const Help: React.FC = () => {
           </ul>
 
           <h3>Advanced Table Tips</h3>
-          <div style={{ backgroundColor: '#fff3cd', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #ffeaa7' }}>
+          <div style={{ backgroundColor: '#f8fafc', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem' }}>
             <p><strong>💡 Pro Tip:</strong> You can paste data from Excel or Google Sheets directly into the editor, and it will automatically create a table!</p>
           </div>
         </div>
@@ -221,7 +221,7 @@ const Help: React.FC = () => {
 
           <h3>Getting More Help</h3>
           <div style={{ backgroundColor: '#e3f2fd', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #90caf9' }}>
-            <p><strong>Need more help?</strong> MarkdownPro is built on the robust MDXEditor framework. For advanced technical questions, you can refer to the original documentation or community resources.</p>
+            <p><strong>Need more help?</strong> Smart Markdown Editor is built on the robust MDXEditor framework. For advanced technical questions, you can refer to the original documentation or community resources.</p>
           </div>
         </div>
       )
@@ -231,10 +231,10 @@ const Help: React.FC = () => {
   return (
     <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', paddingTop: '2rem' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h1 className="section-title">Help &amp; Documentation</h1>
           <p className="section-subtitle">
-            Everything you need to know to get the most out of MarkdownPro
+            Everything you need to know to get the most out of Smart Markdown Editor
           </p>
         </div>
 

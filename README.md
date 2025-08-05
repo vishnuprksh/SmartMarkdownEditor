@@ -1,16 +1,16 @@
-# MarkdownPro - Professional Rich Text Markdown Editor
+# Smart Markdown Editor - Intelligent Rich Text Markdown Editor
 
-A powerful, professional-grade markdown editor built with React and Lexical. Transform your writing experience with true WYSIWYG editing, advanced features, and seamless workflow integration.
+A powerful, intelligent markdown editor built with React and Lexical. Transform your writing experience with AI-powered features, true WYSIWYG editing, and seamless workflow integration.
 
 ## 🚀 Quick Start
 
-### Launch MarkdownPro Web App
+### Launch Smart Markdown Editor Web App
 ```bash
 npm start
 # or
 npm run dev
 ```
-Opens the full MarkdownPro editor application at `http://localhost:5174`
+Opens the full Smart Markdown Editor application at `http://localhost:5174`
 
 ### Component Development (Advanced)
 ```bash
@@ -24,9 +24,9 @@ Opens the Ladle component development environment at `http://localhost:61000`
 
 | Command | Description |
 |---------|-------------|
-| `npm start` | **Start MarkdownPro web app** (recommended) |
-| `npm run dev` | Start MarkdownPro web app (alias for start) |
-| `npm run build:app` | Build MarkdownPro for production deployment |
+| `npm start` | **Start Smart Markdown Editor web app** (recommended) |
+| `npm run dev` | Start Smart Markdown Editor web app (alias for start) |
+| `npm run build:app` | Build Smart Markdown Editor for production deployment |
 | `npm run preview:app` | Preview the production build |
 | `npm run start:components` | Start component development with Ladle |
 | `npm run build` | Build the React component library |
@@ -35,9 +35,10 @@ Opens the Ladle component development environment at `http://localhost:61000`
 
 ## 🎯 What You Get
 
-### **MarkdownPro Web App** (`npm start`)
-- Complete markdown editing application
-- Professional writing interface
+### **Smart Markdown Editor Web App** (`npm start`)
+- Complete intelligent markdown editing application
+- Editor-first experience - opens directly to the editor
+- AI-powered writing assistance
 - Document management (save/load drafts)
 - All advanced features enabled
 - Ready for end users
@@ -52,7 +53,7 @@ Opens the Ladle component development environment at `http://localhost:61000`
 
 ```
 SmartMarkdownEditor/
-├── app/                    # MarkdownPro web application
+├── app/                    # Smart Markdown Editor web application
 │   ├── index.html         # App entry point
 │   ├── main.tsx           # React app initialization  
 │   ├── App.tsx            # Main app with routing
@@ -66,7 +67,8 @@ SmartMarkdownEditor/
 
 ## 🎨 Features
 
-### Professional Writing Tools
+### Intelligent Writing Tools
+- **AI-Powered Assistance**: Smart suggestions and auto-completion
 - **True WYSIWYG**: See formatting as you type
 - **Smart Tables**: Spreadsheet-like table editing
 - **Code Blocks**: Syntax highlighting for 100+ languages
@@ -126,4 +128,4 @@ MIT © Petyo Ivanov
 
 ---
 
-**MarkdownPro** - Where professional writing meets modern technology. ✨
+**Smart Markdown Editor** - Where intelligent writing meets modern technology. 🧠✨
