@@ -17,6 +17,7 @@ const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8')) as {
 }
 
 const IN_LADLE = process.env['LADLE']
+const BUILD_APP = process.env['BUILD_APP']
 
 const externalPackages = [
   ...Object.keys(packageJson.dependencies),
@@ -30,7 +31,7 @@ const externalPackages = [
 export default defineConfig({
   plugins: [
     react(IN_LADLE ? {} : { jsxRuntime: 'classic' } as const),
-    dts({
+    !BUILD_APP && dts({
       rollupTypes: true,
       staticImport: true,
       compilerOptions: {
@@ -44,13 +45,19 @@ export default defineConfig({
       }
     }),
     tsconfigPaths()
-  ],
+  ].filter(Boolean),
+  root: BUILD_APP ? 'app' : '.',
   server: {
     proxy: {
       '/uploads': 'http://localhost:65432'
     },
   },
-  build: {
+  build: BUILD_APP ? {
+    outDir: '../dist-app',
+    rollupOptions: {
+      input: 'app/index.html'
+    }
+  } : {
     minify: 'terser',
     cssMinify: false,
     lib: {
