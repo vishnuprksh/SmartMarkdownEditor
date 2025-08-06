@@ -10,11 +10,15 @@ import {
   toolbarPlugin,
   KitchenSinkToolbar,
   codeBlockPlugin,
+  codeMirrorPlugin,
+  diffSourcePlugin,
   tablePlugin,
   thematicBreakPlugin,
   frontmatterPlugin,
   markdownShortcutPlugin,
-  imagePlugin
+  imagePlugin,
+  CodeBlockEditorDescriptor,
+  useCodeBlockEditorContext
 } from '@mdxeditor/editor'
 
 interface Document {
@@ -23,6 +27,46 @@ interface Document {
   content: string
   lastModified: Date
   wordCount: number
+}
+
+// Default code block editor for handling code blocks without specific language
+const DefaultCodeBlockEditorDescriptor: CodeBlockEditorDescriptor = {
+  match: () => true,
+  priority: 0,
+  Editor: (props) => {
+    const cb = useCodeBlockEditorContext()
+    return (
+      <div
+        onKeyDown={(e) => {
+          e.nativeEvent.stopImmediatePropagation()
+        }}
+        style={{
+          backgroundColor: '#f8f9fa',
+          border: '1px solid #e9ecef',
+          borderRadius: '4px',
+          padding: '8px'
+        }}
+      >
+        <textarea
+          style={{
+            width: '100%',
+            minHeight: '60px',
+            border: 'none',
+            outline: 'none',
+            backgroundColor: 'transparent',
+            fontFamily: 'Monaco, "Lucida Console", monospace',
+            fontSize: '14px',
+            resize: 'vertical'
+          }}
+          defaultValue={props.code}
+          onChange={(e) => {
+            cb.setCode(e.target.value)
+          }}
+          placeholder="Enter your code here..."
+        />
+      </div>
+    )
+  }
 }
 
 const Editor: React.FC = () => {
@@ -44,10 +88,44 @@ const Editor: React.FC = () => {
     linkPlugin(),
     linkDialogPlugin(),
     quotePlugin(),
-    codeBlockPlugin(),
+    codeBlockPlugin({ 
+      defaultCodeBlockLanguage: '',
+      codeBlockEditorDescriptors: [DefaultCodeBlockEditorDescriptor]
+    }),
+    codeMirrorPlugin({
+      codeBlockLanguages: {
+        '': 'Plain Text',
+        js: 'JavaScript',
+        jsx: 'JavaScript (React)',
+        ts: 'TypeScript',
+        tsx: 'TypeScript (React)',
+        css: 'CSS',
+        html: 'HTML',
+        python: 'Python',
+        java: 'Java',
+        cpp: 'C++',
+        c: 'C',
+        php: 'PHP',
+        ruby: 'Ruby',
+        go: 'Go',
+        rust: 'Rust',
+        shell: 'Shell',
+        bash: 'Bash',
+        sql: 'SQL',
+        json: 'JSON',
+        xml: 'XML',
+        yaml: 'YAML',
+        markdown: 'Markdown',
+        txt: 'Plain Text'
+      }
+    }),
     tablePlugin(),
     thematicBreakPlugin(),
     frontmatterPlugin(),
+    diffSourcePlugin({ 
+      viewMode: 'rich-text',
+      diffMarkdown: ''
+    }),
     markdownShortcutPlugin(),
     imagePlugin()
   ]
@@ -67,7 +145,7 @@ const Editor: React.FC = () => {
       // New document
       const now = new Date()
       setTitle(`Untitled Document - ${now.toLocaleDateString()}`)
-      setMarkdown('# Welcome to Smart Markdown Editor\n\nStart writing your document here. This intelligent editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks\n- Tables\n- And much more!\n\n## Getting Started\n\nJust start typing to begin your document. Press **Ctrl+S** or click the **Save** button to save your document and enable auto-save for future changes.')
+      setMarkdown('# Welcome to Smart Markdown Editor\n\nStart writing your document here. This intelligent editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks\n- Tables\n- And much more!\n\n## Getting Started\n\nJust start typing to begin your document. Press **Ctrl+S** or click the **Save** button to save your document and enable auto-save for future changes.\n\n## Code Block Examples\n\nTry creating code blocks in two ways:\n\n1. **Using the toolbar button**: Click the code block button in the toolbar\n2. **Using markdown syntax**: Type three backticks ``` followed by optional language\n\n```javascript\nfunction hello() {\n  console.log("Hello, world!");\n}\n```\n\nYou can also try:\n- ```python for Python\n- ```css for CSS\n- ``` for plain text\n\nInline code works too: `console.log("test")`')
       setHasBeenManuallySaved(false) // New document hasn't been saved yet
     }
   }, [docId])
