@@ -66,7 +66,7 @@ const Home: React.FC = () => {
               Your Documents
             </h1>
             <p style={{ margin: '0.5rem 0 0 0', color: '#718096' }}>
-              {documents.length} {documents.length === 1 ? 'document' : 'documents'}
+              {documents.length} {documents.length === 1 ? 'document' : 'documents'} • ✨ Now with AI assistance
             </p>
           </div>
           <Link 
@@ -217,7 +217,7 @@ const Home: React.FC = () => {
             <p style={{ color: '#718096', marginBottom: '2rem' }}>
               {searchQuery 
                 ? `No documents match "${searchQuery}"`
-                : 'Start writing your first document to see it here'
+                : 'Start writing your first document with AI assistance'
               }
             </p>
             <Link 

@@ -1,0 +1,173 @@
+/* AI Demo Styles */
+
+.ai-demo-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.ai-demo-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem 0;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.header-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+}
+
+.header-content p {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+.ai-demo-main {
+  flex: 1;
+  padding: 2rem;
+  background: white;
+  margin: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.ai-demo-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: white;
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.ai-demo-footer p {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content h1 {
+    font-size: 2rem;
+  }
+  
+  .header-content p {
+    font-size: 1rem;
+  }
+  
+  .ai-demo-main {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .ai-demo-header {
+    padding: 1.5rem 0;
+  }
+}
+
+/* MDXEditor Integration Styles */
+.ai-demo-main .mdxeditor {
+  border: none !important;
+}
+
+.ai-demo-main .mdxeditor-root-contenteditable {
+  min-height: 400px;
+}
+
+/* Custom styling for better integration */
+.ai-demo-main .prose {
+  max-width: none !important;
+}
+
+.ai-demo-main .prose h1 {
+  color: #1f2937;
+}
+
+.ai-demo-main .prose h2 {
+  color: #374151;
+}
+
+.ai-demo-main .prose h3 {
+  color: #4b5563;
+}
+
+.ai-demo-main .prose p {
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.ai-demo-main .prose code {
+  background: #f3f4f6;
+  color: #db2777;
+  padding: 0.25rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.ai-demo-main .prose pre {
+  background: #1f2937;
+  color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.ai-demo-main .prose blockquote {
+  border-left: 4px solid #667eea;
+  background: #f8fafc;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.ai-demo-main .prose ul li::marker {
+  color: #667eea;
+}
+
+.ai-demo-main .prose ol li::marker {
+  color: #667eea;
+}
+
+.ai-demo-main .prose table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ai-demo-main .prose th {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+}
+
+.ai-demo-main .prose td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  color: #6b7280;
+}
+
+/* Loading states and animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loading-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+}

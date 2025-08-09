@@ -79,6 +79,9 @@ export * from './plugins/markdown-shortcut'
 
 export * from './plugins/search'
 
+// AI features
+export * from './plugins/ai'
+
 // Toolbar components
 export * from './plugins/toolbar/components/BlockTypeSelect'
 export * from './plugins/toolbar/components/BoldItalicUnderlineToggles'

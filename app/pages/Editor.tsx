@@ -17,6 +17,7 @@ import {
   frontmatterPlugin,
   markdownShortcutPlugin,
   imagePlugin,
+  aiPlugin,
   CodeBlockEditorDescriptor,
   useCodeBlockEditorContext
 } from '@mdxeditor/editor'
@@ -82,12 +83,19 @@ const Editor: React.FC = () => {
 
   // Plugin configuration
   const plugins = [
-    toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> }),
+    // Core editing plugins
     headingsPlugin(),
     listsPlugin(),
     linkPlugin(),
     linkDialogPlugin(),
     quotePlugin(),
+    tablePlugin(),
+    thematicBreakPlugin(),
+    frontmatterPlugin(),
+    markdownShortcutPlugin(),
+    imagePlugin(),
+    
+    // Code editing plugins
     codeBlockPlugin({ 
       defaultCodeBlockLanguage: '',
       codeBlockEditorDescriptors: [DefaultCodeBlockEditorDescriptor]
@@ -119,15 +127,22 @@ const Editor: React.FC = () => {
         txt: 'Plain Text'
       }
     }),
-    tablePlugin(),
-    thematicBreakPlugin(),
-    frontmatterPlugin(),
+    
+    // Advanced plugins
     diffSourcePlugin({ 
       viewMode: 'rich-text',
       diffMarkdown: ''
     }),
-    markdownShortcutPlugin(),
-    imagePlugin()
+    
+    // AI Plugin - for intelligent content generation and editing
+    aiPlugin({
+      apiKey: (import.meta as any).env?.VITE_GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY_HERE', // Provide via .env
+      enabled: true,
+      toolbarPosition: 'top'
+    }),
+    
+    // Toolbar must be last to include all features
+    toolbarPlugin({ toolbarContents: () => <KitchenSinkToolbar /> })
   ]
 
   // Load document on mount
@@ -145,7 +160,7 @@ const Editor: React.FC = () => {
       // New document
       const now = new Date()
       setTitle(`Untitled Document - ${now.toLocaleDateString()}`)
-      setMarkdown('# Welcome to Smart Markdown Editor\n\nStart writing your document here. This intelligent editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks\n- Tables\n- And much more!\n\n## Getting Started\n\nJust start typing to begin your document. Press **Ctrl+S** or click the **Save** button to save your document and enable auto-save for future changes.\n\n## Code Block Examples\n\nTry creating code blocks in two ways:\n\n1. **Using the toolbar button**: Click the code block button in the toolbar\n2. **Using markdown syntax**: Type three backticks ``` followed by optional language\n\n```javascript\nfunction hello() {\n  console.log("Hello, world!");\n}\n```\n\nYou can also try:\n- ```python for Python\n- ```css for CSS\n- ``` for plain text\n\nInline code works too: `console.log("test")`')
+      setMarkdown('# Welcome to Smart Markdown Editor with AI ✨\n\nStart writing your document here. This intelligent editor supports all markdown features including:\n\n- **Bold** and *italic* text\n- [Links](https://example.com)\n- Code blocks with syntax highlighting\n- Tables, lists, and quotes\n- **🤖 AI-Powered Writing Assistant** (click the AI button in the toolbar!)\n- And much more!\n\n## 🚀 AI Features\n\nClick the **AI** button in the toolbar to access powerful writing assistance:\n\n- **Generate Content**: Create new content from topics or prompts\n- **Improve Text**: Enhance selected text for clarity and quality\n- **Continue Writing**: Let AI continue from where you left off\n- **Summarize**: Generate summaries of selected content\n- **Change Tone**: Rewrite text in formal, casual, or professional tones\n\n## Getting Started\n\n1. **Save First**: Press **Ctrl+S** or click **Save** to enable auto-save\n2. **Try AI**: Select some text and click the **AI** button to enhance it\n3. **Write Freely**: The editor supports all standard markdown syntax\n\n## Code Block Examples\n\nCreate code blocks in two ways:\n\n1. **Toolbar**: Click the code block button\n2. **Markdown**: Type three backticks ``` followed by language\n\n```javascript\n// Try selecting this code and using AI to add documentation\nfunction greetUser(name) {\n  return `Hello, ${name}! Welcome to the AI-powered editor.`;\n}\n```\n\n```python\n# AI can help explain and improve your code\ndef calculate_fibonacci(n):\n    if n <= 1:\n        return n\n    return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)\n```\n\n## ✨ Pro Tips\n\n- Select any text and use AI to improve, summarize, or change its tone\n- Generate new content by clicking AI → Generate Content\n- Use AI to continue writing when you\'re stuck\n- The AI understands context and maintains your writing style\n\n---\n\n**Ready to write with AI assistance? Click the AI button and start exploring!** 🚀')
       setHasBeenManuallySaved(false) // New document hasn't been saved yet
     }
   }, [docId])

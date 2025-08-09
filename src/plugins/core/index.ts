@@ -393,11 +393,23 @@ export const insertMarkdown$ = Signal<string>((r) => {
             return selection.getNodes()[0].getType()
           }
         }
-
         tryImportingMarkdown(r, importPoint, markdownToInsert)
         $insertNodes(importPoint.children)
+      } else {
+        // Fallback: append to end if no selection (e.g., dialog took focus)
+        const importPoint = {
+          children: [] as LexicalNode[],
+            append(node: LexicalNode) {
+              this.children.push(node)
+            },
+            getType() {
+              return 'root'
+            }
+        }
+        tryImportingMarkdown(r, importPoint, markdownToInsert)
+        const root = $getRoot()
+        importPoint.children.forEach((child) => root.append(child))
       }
-
       if (!inFocus) {
         $setSelection(null)
       } else {
